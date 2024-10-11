@@ -1,5 +1,5 @@
 const MovieListViewCard = ({ movie }) => {
-  const { Title, Poster, Genre, Director, Year } = movie;
+  const { Title, Poster, Genre, Director, Year, Plot } = movie;
 
   return (
     <div className="bg-darkBlue text-white/70 rounded-lg shadow-lg p-4 m-2 flex space-x-4 items-center">
@@ -18,6 +18,7 @@ const MovieListViewCard = ({ movie }) => {
         <p className="text-gray-400 mb-1">Genre: {Genre}</p>
         <p className="text-gray-400 mb-1">Director: {Director}</p>
         <p className="text-gray-400">Year: {Year}</p>
+        <p>{Plot}</p>
 
         {/* Action Icons */}
         <div className="flex space-x-4 mt-3">

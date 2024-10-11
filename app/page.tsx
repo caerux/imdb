@@ -52,11 +52,11 @@ const Home = () => {
 
   return (
     <div className="flex">
-      <div className="w-64">
+      <div className="w-64 hidden lg:block">
         <Sidebar />
       </div>
 
-      <div className="flex-1 bg-[#273244]">
+      <div className="flex-1 px-1 md:px-6">
         <Navbar
           isGridView={isGridView}
           setIsGridView={setIsGridView}

@@ -1,3 +1,4 @@
+import { Key } from "react";
 import MovieGridViewCard from "./MovieGridViewCard";
 import MovieListViewCard from "./MovieListViewCard";
 
@@ -5,14 +6,14 @@ const MovieList = ({ movies, isGridView }) => {
   return (
     <>
       {isGridView ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {movies.map((movie, index) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg-grid-cols-3 xl:grid-cols-5">
+          {movies.map((movie: any, index: Key) => (
             <MovieGridViewCard key={index} movie={movie} />
           ))}
         </div>
       ) : (
         <div className="flex flex-col space-y-4">
-          {movies.map((movie, index) => (
+          {movies.map((movie: any, index: Key) => (
             <MovieListViewCard key={index} movie={movie} />
           ))}
         </div>

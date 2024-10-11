@@ -3,14 +3,14 @@ const MovieGridViewCard = ({ movie }) => {
 
   return (
     <div
-      className="bg-darkBlue text-white/70 rounded-lg shadow-lg p-4 m-2 justify-between flex flex-col "
+      className="bg-darkBlue text-white/70 rounded-lg shadow-lg p-2 m-1 justify-between flex flex-col "
       tabIndex={0}
     >
       <div className="flex">
         <img
           src={Poster}
           alt={Title}
-          className="rounded-md mb-4 max-h-56 w-full object-cover"
+          className="rounded-md mb-4 w-full h-40 mobileM:h-48 mobileL:h-64 sm:h-64 object-cover"
         />
       </div>
 
