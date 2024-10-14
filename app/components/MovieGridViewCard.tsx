@@ -2,10 +2,7 @@ const MovieGridViewCard = ({ movie }) => {
   const { Title, Poster } = movie;
 
   return (
-    <div
-      className="bg-darkBlue text-white/70 rounded-lg shadow-lg p-2 m-1 justify-between flex flex-col "
-      tabIndex={0}
-    >
+    <div tabIndex={0}>
       <div className="flex">
         <img
           src={Poster}
@@ -15,7 +12,9 @@ const MovieGridViewCard = ({ movie }) => {
       </div>
 
       <div>
-        <h2 className="text-md font-semibold text-left mb-3">{Title}</h2>
+        <h2 className="text-md font-semibold text-left mb-3 truncate">
+          {Title}
+        </h2>
         <div className="flex w-full space-x-4">
           <img
             src="/icons/play.svg"

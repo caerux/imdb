@@ -12,6 +12,7 @@ const config: Config = {
       mobileM: "375px",
       mobileS: "320px",
       sm: "640px",
+      tablet: "768px",
       md: "900px",
       lg: "1000px",
       xl: "1280px",

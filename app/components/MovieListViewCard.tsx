@@ -3,7 +3,7 @@ const MovieListViewCard = ({ movie }) => {
     movie;
 
   return (
-    <div className="bg-darkBlue text-[#D4D7DD] rounded-lg font-small lg:font-normal shadow-lg flex items-center">
+    <div className="bg-darkBlue text-[#D4D7DD] m-1 rounded-lg font-small lg:font-normal shadow-lg flex items-center">
       {/* Poster */}
       <div className="w-72 h-96 flex-shrink-0 overflow-hidden rounded-l-lg">
         <img
@@ -17,7 +17,7 @@ const MovieListViewCard = ({ movie }) => {
       <div className="flex flex-col mx-10 my-2">
         {/* Title and Rating */}
         <div className="mb-2">
-          <h2 className="text-2xl font-bold mb-1">{Title}</h2>
+          <h1 className="text-2xl font-bold mb-1">{Title}</h1>
           <div className="flex items-center">
             <div className="w-24 h-2 bg-gray-500 rounded-full">
               <div

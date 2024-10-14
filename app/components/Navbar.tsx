@@ -33,7 +33,7 @@ const Navbar = ({ isGridView, setIsGridView, onSearch }) => {
         )}
       </div>
 
-      <div>
+      <div className="hidden tablet:block">
         {isGridView ? (
           <button onClick={() => setIsGridView(false)} className="">
             <FaList />
