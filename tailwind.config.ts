@@ -22,6 +22,7 @@ const config: Config = {
         foreground: "var(--foreground)",
         darkBlue: "#394B61",
         deepBlue: "#1F2A3C",
+        lightBlue: "#00E0FF",
       },
     },
   },

@@ -19,7 +19,7 @@ const Sidebar = () => {
             Eric Hoffman
           </h2>
         </div>
-        <hr className="bg-[#394B61] h-px border-none"></hr>
+        <hr className="bg-darkBlue h-px border-none"></hr>
       </div>
 
       <div>
@@ -30,12 +30,12 @@ const Sidebar = () => {
           <MenuItem icon="TVshows" label="TV Shows" />
           <MenuItem icon="MyList" label="My List" />
         </div>
-        <hr className="bg-[#394B61] h-px border-none"></hr>
+        <hr className="bg-darkBlue h-px border-none"></hr>
         <div className="space-y-6 p-8">
           <MenuItem icon="WatchLater" label="Watch Later" />
           <MenuItem icon="Recommended" label="Recommended" />
         </div>
-        <hr className="bg-[#394B61] h-px border-none"></hr>
+        <hr className="bg-darkBlue h-px border-none"></hr>
         <div className="space-y-4 p-8">
           <MenuItem icon="Settings" label="Settings" />
           <MenuItem icon="Logout" label="Logout" />
