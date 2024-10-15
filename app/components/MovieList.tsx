@@ -17,6 +17,8 @@ const getNumberOfColumns = () => {
 const MovieList = ({ movies, isGridView }) => {
   const [expandedMovieIndex, setExpandedMovieIndex] = useState(null);
   const [columns, setColumns] = useState(getNumberOfColumns());
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,15 +36,25 @@ const MovieList = ({ movies, isGridView }) => {
 
   const isSmallScreen = columns === 2;
 
-  const handleCardClick = (index: any) => {
+  const handleCardClick = (index: number) => {
     if (isSmallScreen) {
       return;
     }
     if (expandedMovieIndex === index) {
-      // Collapse if the same card is clicked again
-      setExpandedMovieIndex(null);
+      setIsAnimating(true);
+      setIsClosing(true);
+      setTimeout(() => {
+        setExpandedMovieIndex(null);
+        setIsAnimating(false);
+        setIsClosing(false);
+      }, 300);
     } else {
       setExpandedMovieIndex(index);
+      setIsAnimating(true);
+      setIsClosing(false);
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 300);
     }
   };
 
@@ -65,16 +77,19 @@ const MovieList = ({ movies, isGridView }) => {
         rows.push(
           <div
             key={`expanded-${expandedMovieIndex}`}
-            className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 mb-4"
+            className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 my-4"
           >
             <div className="col-span-full">
-              <MovieListViewCard movie={movies[expandedMovieIndex]} />
+              <MovieListViewCard
+                movie={movies[expandedMovieIndex]}
+                isAnimating={isAnimating}
+                isClosing={isClosing}
+              />
             </div>
           </div>
         );
       }
 
-      // Render the row of grid cards
       rows.push(
         <div
           key={`row-${currentRowIndex}`}
@@ -104,8 +119,13 @@ const MovieList = ({ movies, isGridView }) => {
   } else {
     return (
       <div className="flex flex-col space-y-4">
-        {movies.map((movie, index) => (
-          <MovieListViewCard key={index} movie={movie} />
+        {movies.map((movie: any, index: React.Key) => (
+          <MovieListViewCard
+            key={index}
+            movie={movie}
+            isAnimating={false}
+            isClosing={false}
+          />
         ))}
       </div>
     );

@@ -25,6 +25,30 @@ const config: Config = {
         deepBlue: "#1F2A3C",
         lightBlue: "#00E0FF",
       },
+      keyframes: {
+        expandVertical: {
+          "0%": { transform: "scaleY(0)" },
+          "100%": { transform: "scaleY(1)" },
+        },
+        collapseVertical: {
+          "0%": { transform: "scaleY(1)" },
+          "100%": { transform: "scaleY(0)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+      },
+      animation: {
+        expandVertical: "expandVertical 300ms ease-out forwards",
+        collapseVertical: "collapseVertical 300ms ease-in forwards",
+        fadeIn: "fadeIn 300ms ease-out forwards",
+        fadeOut: "fadeOut 300ms ease-in forwards",
+      },
     },
   },
   plugins: [],
