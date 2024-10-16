@@ -7,7 +7,7 @@ const Navbar = ({ isGridView, setIsGridView, onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { theme, toggleTheme } = useTheme();
 
-  const handleSearchChange = (event: { target: { value: any } }) => {
+  const handleSearchChange = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
     onSearch(term);
@@ -78,28 +78,30 @@ const Navbar = ({ isGridView, setIsGridView, onSearch }) => {
           )}
         </button>
 
-        {/* Toggle View Button */}
-        {isGridView ? (
-          <button
-            onClick={() => setIsGridView(false)}
-            className="focus:outline-none"
-            aria-label="Switch to List View"
-          >
-            <img
-              src="icons/ListViewIcon.svg"
-              alt="List View Icon"
-              className="filter invert dark:filter-none"
-            />
-          </button>
-        ) : (
-          <button
-            onClick={() => setIsGridView(true)}
-            className="focus:outline-none"
-            aria-label="Switch to Grid View"
-          >
-            <FaTh />
-          </button>
-        )}
+        {/* Toggle View Button - Hidden on Small Screens */}
+        <div className="hidden sm:flex items-center space-x-4">
+          {isGridView ? (
+            <button
+              onClick={() => setIsGridView(false)}
+              className="focus:outline-none"
+              aria-label="Switch to List View"
+            >
+              <img
+                src="icons/ListViewIcon.svg"
+                alt="List View Icon"
+                className="filter invert dark:filter-none"
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsGridView(true)}
+              className="focus:outline-none"
+              aria-label="Switch to Grid View"
+            >
+              <FaTh />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

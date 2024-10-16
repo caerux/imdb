@@ -14,25 +14,30 @@ const getNumberOfColumns = () => {
   }
 };
 
-const MovieList = ({ movies, isGridView }) => {
+const MovieList = ({ movies, initialIsGridView }) => {
   const [expandedMovieIndex, setExpandedMovieIndex] = useState(null);
   const [columns, setColumns] = useState(getNumberOfColumns());
   const [isAnimating, setIsAnimating] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isGridView, setIsGridView] = useState(initialIsGridView);
 
   useEffect(() => {
     const handleResize = () => {
-      setColumns(getNumberOfColumns());
+      const newColumns = getNumberOfColumns();
+      setColumns(newColumns);
+
+      if (newColumns === 2 && !isGridView) {
+        setIsGridView(true);
+      }
     };
 
     window.addEventListener("resize", handleResize);
-
     handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isGridView]);
 
   const isSmallScreen = columns === 2;
 
@@ -118,7 +123,7 @@ const MovieList = ({ movies, isGridView }) => {
     return <div>{rows}</div>;
   } else {
     return (
-      <div className="flex flex-col space-y-4 mx-2">
+      <div className="hidden sm:flex flex-col space-y-4 mx-2">
         {movies.map((movie: any, index: React.Key) => (
           <MovieListViewCard
             key={index}
