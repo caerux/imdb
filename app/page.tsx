@@ -51,7 +51,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-gray-200 dark:bg-backGround">
       <div className="w-64 hidden lg:block">
         <Sidebar />
       </div>

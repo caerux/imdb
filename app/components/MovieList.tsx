@@ -101,9 +101,9 @@ const MovieList = ({ movies, isGridView }) => {
               <div
                 key={movieIndex}
                 onClick={() => handleCardClick(movieIndex)}
-                className={`cursor-pointer bg-darkBlue text-white/70 rounded-lg shadow-lg p-2 m-1 justify-between flex flex-col ${
+                className={`cursor-pointer bg-white dark:bg-darkBlue text-black/70 dark:text-white/70 rounded-lg shadow-lg p-2 m-1 justify-between flex flex-col ${
                   !isSmallScreen && movieIndex === expandedMovieIndex
-                    ? "border border-lightBlue"
+                    ? "border border-gray-300 dark:border-lightBlue"
                     : ""
                 }`}
               >

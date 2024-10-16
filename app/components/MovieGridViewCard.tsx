@@ -12,19 +12,19 @@ const MovieGridViewCard = ({ movie }) => {
       </div>
 
       <div>
-        <h2 className="text-md font-semibold text-left mb-3 truncate">
+        <h2 className="text-md font-semibold text-left mb-3 truncate text-gray-700 dark:text-white">
           {Title}
         </h2>
         <div className="flex w-full space-x-4">
           <img
             src="/icons/play.svg"
             alt="Play"
-            className="w-6 h-6 cursor-pointer hover:opacity-80"
+            className="w-6 h-6 cursor-pointer hover:opacity-80 filter invert-80 dark:filter-none"
           />
           <img
             src="/icons/union.svg"
             alt="Play"
-            className="w-6 h-6 cursor-pointer hover:opacity-80"
+            className="w-6 h-6 cursor-pointer hover:opacity-80 filter invert-80 dark:filter-none"
           />
         </div>
       </div>

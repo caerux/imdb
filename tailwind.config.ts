@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -18,12 +19,21 @@ const config: Config = {
       xl: "1280px",
     },
     extend: {
+      invert: {
+        25: ".25",
+        50: ".5",
+        75: ".75",
+        80: ".80",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
         darkBlue: "#394B61",
+        darkerBlue: "#1A2536",
         deepBlue: "#1F2A3C",
         lightBlue: "#00E0FF",
+        backGround: "#273244",
+        offWhite: "#D4D7DD",
       },
       keyframes: {
         expandVertical: {
