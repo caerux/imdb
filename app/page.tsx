@@ -29,6 +29,22 @@ const Home = () => {
     fetchMovies();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setIsGridView(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleSearch = (searchTerm: string) => {
     if (!searchTerm) {
       setFilteredMovies(movies);

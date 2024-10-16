@@ -14,12 +14,11 @@ const getNumberOfColumns = () => {
   }
 };
 
-const MovieList = ({ movies, initialIsGridView }) => {
+const MovieList = ({ movies, isGridView }) => {
   const [expandedMovieIndex, setExpandedMovieIndex] = useState(null);
   const [columns, setColumns] = useState(getNumberOfColumns());
   const [isAnimating, setIsAnimating] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [isGridView, setIsGridView] = useState(initialIsGridView);
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +26,7 @@ const MovieList = ({ movies, initialIsGridView }) => {
       setColumns(newColumns);
 
       if (newColumns === 2 && !isGridView) {
-        setIsGridView(true);
+        setExpandedMovieIndex(null);
       }
     };
 
@@ -41,7 +40,7 @@ const MovieList = ({ movies, initialIsGridView }) => {
 
   const isSmallScreen = columns === 2;
 
-  const handleCardClick = (index: number) => {
+  const handleCardClick = (index: any) => {
     if (isSmallScreen) {
       return;
     }
