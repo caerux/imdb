@@ -3,7 +3,7 @@ const MovieListViewCard = ({ movie, isAnimating, isClosing }) => {
 
   return (
     <div
-      className={`bg-darkBlue m-1 rounded-lg shadow-lg w-full ${
+      className={`bg-darkBlue mr-2 rounded-lg shadow-lg w-full ${
         isAnimating
           ? isClosing
             ? "animate-collapseVertical"

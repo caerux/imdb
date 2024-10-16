@@ -56,7 +56,7 @@ const Home = () => {
         <Sidebar />
       </div>
 
-      <div className="flex-1 px-1 md:px-6">
+      <div className="flex-1 px-2 md:px-6">
         <Navbar
           isGridView={isGridView}
           setIsGridView={setIsGridView}

@@ -79,7 +79,7 @@ const MovieList = ({ movies, isGridView }) => {
             key={`expanded-${expandedMovieIndex}`}
             className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 my-4"
           >
-            <div className="col-span-full">
+            <div className="col-span-full mx-2">
               <MovieListViewCard
                 movie={movies[expandedMovieIndex]}
                 isAnimating={isAnimating}
@@ -118,7 +118,7 @@ const MovieList = ({ movies, isGridView }) => {
     return <div>{rows}</div>;
   } else {
     return (
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 mx-2">
         {movies.map((movie: any, index: React.Key) => (
           <MovieListViewCard
             key={index}
