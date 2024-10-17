@@ -3,6 +3,7 @@
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import MovieList from "./components/MovieList";
+import LoaderOverlay from "./components/LoaderOverlay";
 import { useEffect, useState } from "react";
 
 const Home = () => {
@@ -11,23 +12,28 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [isGridView, setIsGridView] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const fetchMovies = async () => {
-    try {
-      const res = await fetch("/api/movies");
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const data = await res.json();
-      setMovies(data);
-      setFilteredMovies(data);
-    } catch (err) {
-      setError(err.message);
-      console.error(err);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const fetchMovies = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch("/api/movies");
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await res.json();
+
+        setMovies(data);
+        setFilteredMovies(data);
+      } catch (err) {
+        setError(err.message);
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchMovies();
 
     const handleResize = () => {
@@ -54,7 +60,7 @@ const Home = () => {
     const lowercasedTerm = searchTerm.toLowerCase();
 
     const filtered = movies.filter(
-      (movie) =>
+      (movie: any) =>
         movie.Title.toLowerCase().includes(lowercasedTerm) ||
         movie.Year.toString().includes(lowercasedTerm) ||
         movie.Director.toLowerCase().includes(lowercasedTerm) ||
@@ -66,11 +72,15 @@ const Home = () => {
     setFilteredMovies(filtered);
   };
 
+  if (isLoading) {
+    return <LoaderOverlay />;
+  }
+
   return (
     <div className="flex bg-gray-200 dark:bg-backGround">
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-      <div className="flex-1 px-2 md:px-6 lg:ml-64">
+      <div className="flex-1 px-2 md:px-6 lg:ml-64 relative">
         <Navbar
           isGridView={isGridView}
           setIsGridView={setIsGridView}
