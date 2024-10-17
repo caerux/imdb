@@ -68,7 +68,7 @@ const Navbar = ({ isGridView, setIsGridView, onSearch }) => {
       </div>
 
       {/* Toggle View Button */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-6">
         {/* Theme Toggle Button */}
         <button onClick={toggleTheme} className="focus:outline-none">
           {theme === "light" ? (
@@ -79,28 +79,24 @@ const Navbar = ({ isGridView, setIsGridView, onSearch }) => {
         </button>
 
         {/* Toggle View Button - Hidden on Small Screens */}
-        <div className="hidden sm:flex items-center space-x-4">
-          {isGridView ? (
-            <button
-              onClick={() => setIsGridView(false)}
-              className="focus:outline-none"
-              aria-label="Switch to List View"
-            >
+        <div className="hidden sm:flex items-center">
+          <button
+            onClick={() => setIsGridView(!isGridView)}
+            className="focus:outline-none"
+            aria-label={
+              isGridView ? "Switch to List View" : "Switch to Grid View"
+            }
+          >
+            {isGridView ? (
               <img
                 src="icons/ListViewIcon.svg"
                 alt="List View Icon"
                 className="filter invert dark:filter-none"
               />
-            </button>
-          ) : (
-            <button
-              onClick={() => setIsGridView(true)}
-              className="focus:outline-none"
-              aria-label="Switch to Grid View"
-            >
+            ) : (
               <FaTh />
-            </button>
-          )}
+            )}
+          </button>
         </div>
       </div>
     </div>

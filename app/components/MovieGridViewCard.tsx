@@ -7,15 +7,15 @@ const MovieGridViewCard = ({ movie }) => {
         <img
           src={Poster}
           alt={Title}
-          className="rounded-md mb-4 w-full h-40 mobileM:h-48 mobileL:h-64 sm:h-64 object-cover"
+          className="rounded-md mb-2 w-full h-40 mobileM:h-48 mobileL:h-64 sm:h-64 object-cover"
         />
       </div>
 
       <div>
-        <h2 className="text-md font-semibold text-left mb-3 truncate text-gray-700 dark:text-white">
+        <h2 className="text-md font-semibold text-left mb-2 truncate text-gray-700 dark:text-white">
           {Title}
         </h2>
-        <div className="flex w-full space-x-4">
+        <div className="flex w-full space-x-4 mb-1">
           <img
             src="/icons/play.svg"
             alt="Play"

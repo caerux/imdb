@@ -27,9 +27,6 @@ const Home = () => {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
-
-  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setIsGridView(true);

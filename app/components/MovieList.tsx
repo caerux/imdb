@@ -97,7 +97,7 @@ const MovieList = ({ movies, isGridView }) => {
       rows.push(
         <div
           key={`row-${currentRowIndex}`}
-          className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5"
+          className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2"
         >
           {rowMovies.map((movie: any, index: number) => {
             const movieIndex = i + index;
@@ -105,7 +105,7 @@ const MovieList = ({ movies, isGridView }) => {
               <div
                 key={movieIndex}
                 onClick={() => handleCardClick(movieIndex)}
-                className={`cursor-pointer bg-white dark:bg-darkBlue text-black/70 dark:text-white/70 rounded-lg shadow-lg p-2 m-1 justify-between flex flex-col ${
+                className={`cursor-pointer bg-white dark:bg-darkBlue text-black/70 dark:text-white/70 rounded-lg shadow-lg p-2 m-1 md:m-2 justify-between flex flex-col ${
                   !isSmallScreen && movieIndex === expandedMovieIndex
                     ? "border border-gray-300 dark:border-lightBlue"
                     : ""
@@ -119,7 +119,7 @@ const MovieList = ({ movies, isGridView }) => {
       );
     }
 
-    return <div>{rows}</div>;
+    return <>{rows}</>;
   } else {
     return (
       <div className="hidden sm:flex flex-col space-y-4 mx-2">
