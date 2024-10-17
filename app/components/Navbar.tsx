@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaTh, FaMoon, FaList } from "react-icons/fa";
 import { CgMenu } from "react-icons/cg";
-import { useTheme } from "../context/themeContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = ({ isGridView, setIsGridView, onSearch, onSidebarOpen }) => {
   const [showSearch, setShowSearch] = useState(false);
