@@ -16,16 +16,13 @@ const MovieGridView = ({
     const rowMovies = movies.slice(i, i + columns);
 
     const currentRowIndex = Math.floor(i / columns);
-    const expandedRowIndex =
-      expandedMovieIndex !== null
-        ? Math.floor(expandedMovieIndex / columns)
-        : -1;
-
-    if (
-      !isSmallScreen &&
+    const isRowExpanded =
       expandedMovieIndex !== null &&
-      expandedRowIndex === currentRowIndex
-    ) {
+      expandedMovieIndex >= i &&
+      expandedMovieIndex < i + columns;
+
+    if (isRowExpanded) {
+      const expandedMovie = movies[expandedMovieIndex];
       rows.push(
         <div
           key={`expanded-${expandedMovieIndex}`}
@@ -33,7 +30,7 @@ const MovieGridView = ({
         >
           <div className="col-span-full mx-2">
             <MovieListViewCard
-              movie={movies[expandedMovieIndex]}
+              movie={expandedMovie}
               isAnimating={isAnimating}
               isClosing={isClosing}
             />
@@ -53,9 +50,9 @@ const MovieGridView = ({
             <div
               key={movieIndex}
               onClick={() => handleCardClick(movieIndex)}
-              className={`cursor-pointer bg-white dark:bg-darkBlue text-black/70 dark:text-white/70 rounded-lg shadow-lg p-2 m-1 md:m-2 md:p-3 justify-between flex flex-col ${
+              className={`cursor-pointer bg-white dark:bg-darkBlue text-black/70 dark:text-white/70 rounded-lg p-2 m-1 sm:m-2 sm:mb-3 sm:p-3 justify-between flex flex-col ${
                 !isSmallScreen && movieIndex === expandedMovieIndex
-                  ? "border border-gray-300 dark:border-lightBlue"
+                  ? "border border-blue-500 dark:border-lightBlue"
                   : ""
               }`}
             >

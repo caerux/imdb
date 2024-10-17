@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 import MovieGridView from "./MovieGridView";
 import MovieListViewCard from "./MovieListViewCard";
+import Modal from "./Modal";
+import MovieDetailPopup from "./MovieDetailPopup";
 
 const getNumberOfColumns = () => {
   const width = window.innerWidth;
@@ -15,18 +17,39 @@ const getNumberOfColumns = () => {
 };
 
 const MovieList = ({ movies, isGridView }) => {
-  const [expandedMovieIndex, setExpandedMovieIndex] = useState(null);
+  const [selectedMovieIndex, setSelectedMovieIndex] = useState(null);
   const [columns, setColumns] = useState(getNumberOfColumns());
   const [isAnimating, setIsAnimating] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 640);
+
   useEffect(() => {
     const handleResize = () => {
+      const currentlySmall = window.innerWidth < 640;
+
+      if (currentlySmall !== isSmallScreen) {
+        setIsSmallScreen(currentlySmall);
+        if (currentlySmall) {
+          // Switching to small screen
+          if (selectedMovieIndex !== null) {
+            setIsModalOpen(true);
+          }
+        } else {
+          // Switching to large screen
+          if (isModalOpen) {
+            setIsModalOpen(false);
+          }
+        }
+      }
+
       const newColumns = getNumberOfColumns();
       setColumns(newColumns);
 
       if (newColumns === 2 && !isGridView) {
-        setExpandedMovieIndex(null);
+        setSelectedMovieIndex(null);
       }
     };
 
@@ -36,58 +59,83 @@ const MovieList = ({ movies, isGridView }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [isGridView]);
-
-  const isSmallScreen = columns === 2;
+  }, [isSmallScreen, isModalOpen, selectedMovieIndex, isGridView]);
 
   const handleCardClick = (index) => {
     if (isSmallScreen) {
-      return;
-    }
-    if (expandedMovieIndex === index) {
-      setIsAnimating(true);
-      setIsClosing(true);
-      setTimeout(() => {
-        setExpandedMovieIndex(null);
-        setIsAnimating(false);
-        setIsClosing(false);
-      }, 300);
+      if (selectedMovieIndex === index) {
+        // If the same movie is clicked again, close the modal
+        setIsModalOpen(false);
+        setSelectedMovieIndex(null);
+      } else {
+        // Open modal with the selected movie
+        setSelectedMovieIndex(index);
+        setIsModalOpen(true);
+      }
     } else {
-      setExpandedMovieIndex(index);
-      setIsAnimating(true);
-      setIsClosing(false);
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 300);
+      if (selectedMovieIndex === index) {
+        // Close the expanded view
+        setIsAnimating(true);
+        setIsClosing(true);
+        setTimeout(() => {
+          setSelectedMovieIndex(null);
+          setIsAnimating(false);
+          setIsClosing(false);
+        }, 300);
+      } else {
+        // Open expanded view for the selected movie
+        setSelectedMovieIndex(index);
+        setIsAnimating(true);
+        setIsClosing(false);
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 300);
+      }
     }
   };
 
-  if (isGridView) {
-    return (
-      <MovieGridView
-        movies={movies}
-        columns={columns}
-        expandedMovieIndex={expandedMovieIndex}
-        isAnimating={isAnimating}
-        isClosing={isClosing}
-        isSmallScreen={isSmallScreen}
-        handleCardClick={handleCardClick}
-      />
-    );
-  } else {
-    return (
-      <div className="hidden sm:flex flex-col space-y-4 mx-2">
-        {movies.map((movie: any, index: React.Key) => (
-          <MovieListViewCard
-            key={index}
-            movie={movie}
-            isAnimating={false}
-            isClosing={false}
-          />
-        ))}
-      </div>
-    );
-  }
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMovieIndex(null);
+  };
+
+  // Get the selected movie object for modal
+  const selectedMovieObj =
+    selectedMovieIndex !== null ? movies[selectedMovieIndex] : null;
+
+  return (
+    <>
+      {isGridView ? (
+        <MovieGridView
+          movies={movies}
+          columns={columns}
+          expandedMovieIndex={!isSmallScreen ? selectedMovieIndex : null}
+          isAnimating={isAnimating}
+          isClosing={isClosing}
+          isSmallScreen={isSmallScreen}
+          handleCardClick={handleCardClick}
+        />
+      ) : (
+        <div className="hidden sm:flex flex-col space-y-4 mx-2">
+          {movies.map((movie: any, index: React.Key) => (
+            <MovieListViewCard
+              key={index}
+              movie={movie}
+              isAnimating={false}
+              isClosing={false}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Modal for small screens */}
+      {isModalOpen && selectedMovieObj && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <MovieDetailPopup movie={selectedMovieObj} />
+        </Modal>
+      )}
+    </>
+  );
 };
 
 export default MovieList;

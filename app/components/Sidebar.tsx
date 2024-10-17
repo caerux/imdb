@@ -81,7 +81,7 @@ const MenuItem = ({ icon, label, isActive }) => {
           }`}
         />
       ) : (
-        <span
+        <div
           className={`w-5 h-5 flex items-center ${
             isActive
               ? "text-blue-500 dark:text-lightBlue"
@@ -89,7 +89,7 @@ const MenuItem = ({ icon, label, isActive }) => {
           }`}
         >
           {icon}
-        </span>
+        </div>
       )}
       <span>{label}</span>
     </div>

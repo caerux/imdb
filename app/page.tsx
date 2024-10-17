@@ -14,7 +14,7 @@ const Home = () => {
 
   const fetchMovies = async () => {
     try {
-      const res = await fetch("api/movies");
+      const res = await fetch("/api/movies");
       if (!res.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -23,12 +23,13 @@ const Home = () => {
       setFilteredMovies(data);
     } catch (err) {
       setError(err.message);
-      console.log(error);
+      console.error(err);
     }
   };
 
   useEffect(() => {
     fetchMovies();
+
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setIsGridView(true);
@@ -77,7 +78,13 @@ const Home = () => {
           onSidebarOpen={() => setIsSidebarOpen(true)}
         />
 
-        <MovieList movies={filteredMovies} isGridView={isGridView} />
+        {filteredMovies.length === 0 ? (
+          <div className="text-gray-500 mt-4 text-center">
+            No movies found matching your search.
+          </div>
+        ) : (
+          <MovieList movies={filteredMovies} isGridView={isGridView} />
+        )}
       </div>
     </div>
   );

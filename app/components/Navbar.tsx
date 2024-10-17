@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaTh, FaMoon } from "react-icons/fa";
+import { FaTh, FaMoon, FaList } from "react-icons/fa";
 import { CgMenu } from "react-icons/cg";
 import { useTheme } from "../context/themeContext";
 
@@ -98,15 +98,7 @@ const Navbar = ({ isGridView, setIsGridView, onSearch, onSidebarOpen }) => {
               isGridView ? "Switch to List View" : "Switch to Grid View"
             }
           >
-            {isGridView ? (
-              <img
-                src="icons/ListViewIcon.svg"
-                alt="List View Icon"
-                className="filter invert dark:filter-none"
-              />
-            ) : (
-              <FaTh />
-            )}
+            {isGridView ? <FaList /> : <FaTh />}
           </button>
         </div>
       </div>
