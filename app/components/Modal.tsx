@@ -20,10 +20,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       className="fixed inset-0 z-60 flex items-center justify-center bg-black bg-opacity-50"
       onClick={onClose}
     >
-      <div
-        className="bg-white dark:bg-darkBlue text-offWhite rounded-lg shadow-lg p-4 relative max-w-3xl w-full mx-2 sm:mx-4"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="bg-white dark:bg-darkBlue text-offWhite rounded-lg shadow-lg p-4 relative max-w-3xl w-full mx-2 sm:mx-4">
         {/* Close Button */}
         <button
           onClick={onClose}
